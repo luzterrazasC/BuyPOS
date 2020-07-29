@@ -13,8 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-    
-
+    var product:Array<Any>?
+    var databaseRT:DataBaseRealtime?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +31,13 @@ class ViewController: UIViewController {
         userAcces(typeLog: 2)
     }
     
+   //Autentificadion del usuario
     func userAcces(typeLog:Int){
-
+//TypeLog  1  registrar usuario
     if let email = txtEmail.text, let password = txtPassword.text {
         if typeLog == 1 {
             Auth.auth().createUser(withEmail:email, password:password) { (resul, errorLog) in
-                if let resultado  = resul, errorLog == nil {
+                if  resul != nil, errorLog == nil {
                     let userInfo = Auth.auth().currentUser
                     if userInfo != nil {
                         
@@ -44,8 +45,7 @@ class ViewController: UIViewController {
 
                         self.performSegue(withIdentifier: "segueRegister", sender:dataArray)
                     }else {
-                        // No user is signed in.
-                        // ...
+                        
                     }
                     
                 }else{
@@ -53,11 +53,11 @@ class ViewController: UIViewController {
    
                 }
             }
-            
+// TypeLog  2 ingresar
         }else{
        
            Auth.auth().signIn(withEmail: email, password: password) {  (resul, errorLog) in
-            if let resultado  = resul, errorLog == nil {
+            if resul != nil, errorLog == nil {
                let userInfo = Auth.auth().currentUser
                 if userInfo != nil {
                     
@@ -65,20 +65,18 @@ class ViewController: UIViewController {
 
                    self.performSegue(withIdentifier: "segueHome", sender:uid)
                 }else {
-                    // No user is signed in.
-                    // ...
+
                 }
-               
-                
             }else{
                 self.alert(messageError:errorLog!.localizedDescription)
                 
-            }
-                }
-           
+                  }
+               }
             }
         }
     }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueRegister"{
             let  dateReceip = sender as! Array<String>
@@ -101,7 +99,8 @@ class ViewController: UIViewController {
         }
     }
         
-        func alert(messageError:String){
+
+    func alert(messageError:String){
             
             let alert = UIAlertController(title: "Error", message:messageError, preferredStyle: .alert)
             
@@ -116,5 +115,27 @@ class ViewController: UIViewController {
     }
     
     
-}
+    
+    @IBAction func btnPrueba(_ sender: UIButton) {
+        
+        databaseRT = DataBaseRealtime()
+        let dicttionary = databaseRT!.getData(child: "Products")
+        
+     
+       
+        
+        /*for value in products {
+            let array = (value as! [String : String])
+            print("Nombre de la Llave: \(array)")*/
+            
+            
+        }
+        
+    }
+
+
+
+    
+    
+
 

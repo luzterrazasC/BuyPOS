@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
     var email:String?
     var displayName: String?
     var nameStore:String?
-    
+    var dataBaseRealtime:DataBaseRealtime?
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtNameStore: UITextField!
@@ -22,25 +22,33 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Registro"
+        dataBaseRealtime = DataBaseRealtime()
          userInfo()
     }
     
     func userInfo(){
         txtName.text = displayName
         txtEmail.text = email
-        print(uiId!)
+        txtNameStore.text = nameStore
     }
    
     @IBAction func btnUserSave(_ sender: UIButton) {
-       
-        let  dataUser = [txtName.text!, uiId!, txtNameStore.text!]
+     //  userInfo()
+    let  dataUser = [txtName.text!, uiId!, txtNameStore.text!]
+    let store:Dictionary<String,String> = ["NameStore" :txtNameStore.text!,
+                                           "UserName":txtName.text!,
+                                            "UiId": uiId!]
         
-        let ref = Database.database().reference()
+   let result = dataBaseRealtime!.insertDataBase(child: "Store", parameters: store)
+          self.performSegue(withIdentifier: "segueRegisterHome", sender:dataUser)
+        print(result)
+       // let ref = Database.database().reference()
         //Agregar tienda
-        ref.child("Store").child("\(uiId!)").setValue(["NameStore" :nameStore!,
-                                                        "UserName":displayName!])
+       /* ref.child("Store").childByAutoId().setValue(["NameStore" :txtNameStore.text!,
+                                                         "UserName":txtName.text!,
+                                                         "UiId": uiId!])*/
        
-           self.performSegue(withIdentifier: "segueRegisterHome", sender:dataUser)
+        
         
     }
 
