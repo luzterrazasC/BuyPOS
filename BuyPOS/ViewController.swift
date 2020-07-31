@@ -9,15 +9,20 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+   
+    
 
+    @IBOutlet weak var collectionImg: UICollectionView!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     var product:Array<Any>?
     var databaseRT:DataBaseRealtime?
-    
+    var arrayImages = ["pos1","pos22","pos33","pos44"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionImg.dataSource = self
+        collectionImg.delegate = self
         title = "BuyPOS"
     }
 
@@ -130,6 +135,20 @@ class ViewController: UIViewController {
             
             
         }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return arrayImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagePos", for: indexPath) as! ImageViewCell
+
+        cell.imgPOS.image = UIImage(named: arrayImages [indexPath.row])
+       
+        return cell
+        }
+
         
     }
 
