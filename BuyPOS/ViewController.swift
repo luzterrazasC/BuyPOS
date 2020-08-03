@@ -9,24 +9,86 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate,UICollectionViewDataSource{
    
     
-
+    @IBOutlet weak var btnCleanPass: UIButton!
+    @IBOutlet weak var btnClean: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionImg: UICollectionView!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+   
+    
     var product:Array<Any>?
     var databaseRT:DataBaseRealtime?
     var arrayImages = ["pos1","pos22","pos33","pos44"]
+    var arrayText = ["El mejor punto de venta","SamsumPay","Scanner","Facturacion"]
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionImg.dataSource = self
-        collectionImg.delegate = self
+       btnClean.isHidden = true
+       btnCleanPass.isHidden = true
+       collectionImg.dataSource = self
+       collectionImg.delegate = self
         title = "BuyPOS"
+        pageControl.numberOfPages = arrayImages.count
+       
     }
 
     
+    func  textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0,y: 250), animated: true)
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0,y: 0), animated: true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        txtEmail.resignFirstResponder()
+        txtPassword.resignFirstResponder()
+        return true
+    }
+    
+  
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let char = string.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b") 
+       print(textField.tag)
+        switch textField.tag {
+        case 0:
+            if isBackSpace == -92{
+                btnClean.isHidden = true
+            }else{
+                btnClean.isHidden = false
+            }
+        default:
+            if isBackSpace == -92{
+                btnCleanPass.isHidden = true
+            }else{
+                btnCleanPass.isHidden = false
+            }
+        }
+        
+        
+        
+        return true
+    }
+    
+    
+    @IBAction func btnClean_Action(_ sender: UIButton) {
+        txtEmail.text = " "
+        txtEmail.text = nil
+        btnClean.isHidden = true
+    }
+    
+    @IBAction func btnCleanPass_Act(_ sender: UIButton) {
+        txtPassword.text = " "
+        txtPassword.text = nil
+        btnCleanPass.isHidden = true
+    }
     
     @IBAction func btnRegister(_ sender: UIButton) {
         userAcces(typeLog: 1)
@@ -36,7 +98,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         userAcces(typeLog: 2)
     }
     
-   //Autentificadion del usuario
+  
+    //Autentificadion del usuario
     func userAcces(typeLog:Int){
 //TypeLog  1  registrar usuario
     if let email = txtEmail.text, let password = txtPassword.text {
@@ -137,15 +200,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagePos", for: indexPath) as! ImageViewCell
-
+    
         cell.imgPOS.image = UIImage(named: arrayImages [indexPath.row])
-       
+        cell.lblDescription.text = arrayText[indexPath.row]
         return cell
         }
 

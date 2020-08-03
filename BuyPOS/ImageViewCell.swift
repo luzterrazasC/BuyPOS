@@ -11,4 +11,5 @@ import UIKit
 class ImageViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imgPOS: UIImageView!
+    @IBOutlet weak var lblDescription: UILabel!
 }
