@@ -128,10 +128,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDel
             if resul != nil, errorLog == nil {
                let userInfo = Auth.auth().currentUser
                 if userInfo != nil {
-                    
                     let uid = userInfo!.uid
-
-                   self.performSegue(withIdentifier: "segueHome", sender:uid)
+               
+                    //let products = self.databaseRT!.getProducts(table:"Products")
+                    self.getProducts(table: "Products")
+                    
                 }else {
 
                 }
@@ -145,6 +146,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDel
     }
     
     
+    func getProducts(table:String){
+        let ref = Database.database().reference()
+        var arrayDes:NSDictionary!
+        ref.child(table).observeSingleEvent(of: .value) { (resultado) in
+            arrayDes = (resultado.value as? NSDictionary)!
+            
+            let  productObj = Array(arrayDes.allValues)
+            /* for value in productObj {
+             let array = (value as! Dictionary<String,String>)*/
+            
+            
+          //  print("Productos: \(productObj)")
+            self.performSegue(withIdentifier: "segueHome", sender:productObj)
+
+        }
+        
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueRegister"{
             let  dateReceip = sender as! Array<String>
@@ -156,9 +174,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDel
             txtPassword.text = ""
         }else {
             if segue.identifier == "segueHome"{
-                let  uidUser = sender as! String
-                let obj: HomeViewController = segue.destination as! HomeViewController
-                obj.uidUser = uidUser
+                let  products = sender as! Array<Any>
+                let obj: ProductsViewController = segue.destination as! ProductsViewController
+                obj.products = products
+             
 
                 txtEmail.text = ""
                 txtPassword.text = ""
@@ -178,27 +197,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDel
         }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    
-    
-    @IBAction func btnPrueba(_ sender: UIButton) {
-        
-        databaseRT = DataBaseRealtime()
-        let dicttionary = databaseRT!.getData(child: "Products")
-        
-     
-       
-        
-        /*for value in products {
-            let array = (value as! [String : String])
-            print("Nombre de la Llave: \(array)")*/
-            
-            
-        }
-    
+   
+
     
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayImages.count
@@ -208,7 +208,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagePos", for: indexPath) as! ImageViewCell
     
         cell.imgPOS.image = UIImage(named: arrayImages [indexPath.row])
-        cell.lblDescription.text = arrayText[indexPath.row]
+       // cell.lblDescription.text = arrayText[indexPath.row]
         return cell
         }
 

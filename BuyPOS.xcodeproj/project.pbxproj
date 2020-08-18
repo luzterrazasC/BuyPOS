@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1321A5D824DC69CE00B91892 /* AddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1321A5D724DC69CE00B91892 /* AddProductController.swift */; };
+		1321A5DA24DC6A1800B91892 /* TicketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1321A5D924DC6A1800B91892 /* TicketController.swift */; };
 		13460C3724CF3E1A006A1F9A /* DataBaseRealtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13460C3624CF3E1A006A1F9A /* DataBaseRealtime.swift */; };
 		13C417A924C79FE400F88E36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C417A824C79FE400F88E36 /* AppDelegate.swift */; };
 		13C417AB24C79FE400F88E36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C417AA24C79FE400F88E36 /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1321A5D724DC69CE00B91892 /* AddProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductController.swift; sourceTree = "<group>"; };
+		1321A5D924DC6A1800B91892 /* TicketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketController.swift; sourceTree = "<group>"; };
 		13460C3624CF3E1A006A1F9A /* DataBaseRealtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseRealtime.swift; sourceTree = "<group>"; };
 		13C417A524C79FE400F88E36 /* BuyPOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuyPOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13C417A824C79FE400F88E36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +66,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		13092C8D24D9DD5000D5C7E7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				13C417AA24C79FE400F88E36 /* ViewController.swift */,
+				13F96F5924D2416B00117F93 /* ImageViewCell.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		13092C8E24D9DD7700D5C7E7 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				13460C3624CF3E1A006A1F9A /* DataBaseRealtime.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		13092C8F24D9DDB300D5C7E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13FD966624D1DA4F00881678 /* ProductCell.swift */,
+				1321A5D724DC69CE00B91892 /* AddProductController.swift */,
+				13FD966424D086C400881678 /* ProductsViewController.swift */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		13092C9324DA0F9B00D5C7E7 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				13C417BA24C7A23B00F88E36 /* RegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		13C4179C24C79FE400F88E36 = {
 			isa = PBXGroup;
 			children = (
@@ -84,18 +123,17 @@
 			isa = PBXGroup;
 			children = (
 				13C417A824C79FE400F88E36 /* AppDelegate.swift */,
-				13C417AA24C79FE400F88E36 /* ViewController.swift */,
-				13C417BA24C7A23B00F88E36 /* RegisterViewController.swift */,
+				13092C8D24D9DD5000D5C7E7 /* Login */,
+				13092C9324DA0F9B00D5C7E7 /* Register */,
+				13092C8E24D9DD7700D5C7E7 /* DataBase */,
+				13092C8F24D9DDB300D5C7E7 /* Products */,
 				13C417BC24C7A24900F88E36 /* HomeViewController.swift */,
-				13FD966424D086C400881678 /* ProductsViewController.swift */,
-				13460C3624CF3E1A006A1F9A /* DataBaseRealtime.swift */,
-				13FD966624D1DA4F00881678 /* ProductCell.swift */,
-				13F96F5924D2416B00117F93 /* ImageViewCell.swift */,
 				13C417AF24C79FE600F88E36 /* Assets.xcassets */,
 				13C417AC24C79FE400F88E36 /* Main.storyboard */,
 				13C417B124C79FE600F88E36 /* LaunchScreen.storyboard */,
 				13C417BE24C890BF00F88E36 /* GoogleService-Info.plist */,
 				13C417B424C79FE600F88E36 /* Info.plist */,
+				1321A5D924DC6A1800B91892 /* TicketController.swift */,
 			);
 			path = BuyPOS;
 			sourceTree = "<group>";
@@ -212,9 +250,11 @@
 				13C417BB24C7A23B00F88E36 /* RegisterViewController.swift in Sources */,
 				13C417AB24C79FE400F88E36 /* ViewController.swift in Sources */,
 				13F96F5A24D2416B00117F93 /* ImageViewCell.swift in Sources */,
+				1321A5DA24DC6A1800B91892 /* TicketController.swift in Sources */,
 				13C417A924C79FE400F88E36 /* AppDelegate.swift in Sources */,
 				13FD966724D1DA4F00881678 /* ProductCell.swift in Sources */,
 				13C417BD24C7A24900F88E36 /* HomeViewController.swift in Sources */,
+				1321A5D824DC69CE00B91892 /* AddProductController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

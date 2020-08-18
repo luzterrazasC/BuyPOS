@@ -27,10 +27,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.setHidesBackButton(true, animated: false)
-        lblUserName.text = userName
-        title = storeName
-        dataBaseRealtime = DataBaseRealtime()
-        accesStore(id: uidUser!)
+
 
     }
     

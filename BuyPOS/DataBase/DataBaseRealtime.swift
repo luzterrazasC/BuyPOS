@@ -26,7 +26,8 @@ class DataBaseRealtime{
          return true
         }
     
-    func getData(child: String)->Bool{
+
+   func getData(child: String)->Bool{
       
         var arrayDes:NSDictionary!
        
@@ -38,7 +39,7 @@ class DataBaseRealtime{
                     let array = (value as! Dictionary<String,String>)*/
                     
                     
-                    print("Productos: \(productObj)")
+                   // print("Productos: \(productObj)")
                 
                
         //}
@@ -50,7 +51,19 @@ class DataBaseRealtime{
                 let arr = (value as! [String : String])
                 print("Nombre de la Llave: \(arr)")
             }*/
-        
+    func getProducts(table:String) ->NSDictionary{
+       
+            var arrayDes:NSDictionary!
+            let ref = Database.database().reference()
+            ref.child(table).observeSingleEvent(of: .value) { (resultado) in
+                arrayDes = (resultado.value as? NSDictionary)!
+                
+    //let productObj = Array(arrayDes.allValues)
+            
+        }
+        return arrayDes
+    }
+    
     
 }
 
